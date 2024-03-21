@@ -36,21 +36,23 @@ public class SecurityConfig {
         return new UserDetailsServiceImpl();
     }
 
-    /*@Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable())
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/login").permitAll()
-                        .requestMatchers("/api/v1/**")
-                        .authenticated())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/api/v1/login").permitAll()
+                        .requestMatchers("/auth/api/v1/**")
+                        .authenticated()
+                        .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(authentication))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
 
-    }*/
+    }
 
+   /*
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
@@ -65,7 +67,7 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
 
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -31,7 +31,7 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         if (authentication.isAuthenticated()) {
-            return UserResponse.builder()
+            return UserResponse.builder().username(request.getUsername())
                     .accessToken(service.GenerateToken(request.getUsername())).build();
         } else {
             throw new UsernameNotFoundException("invalid user request..!!");
